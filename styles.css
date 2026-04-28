@@ -1,0 +1,284 @@
+:root {
+  --bg: #f7f4ee;
+  --surface: #fffdf8;
+  --surface-strong: #f1ebe0;
+  --border: #d7cfc1;
+  --text: #2d2a26;
+  --muted: #6f685e;
+  --accent: #546b5f;
+  --accent-strong: #405247;
+  --shadow: 0 18px 40px rgba(58, 49, 38, 0.08);
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: linear-gradient(180deg, #fbf8f2 0%, var(--bg) 100%);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page {
+  width: min(1080px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.hero {
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.intro {
+  max-width: 42rem;
+  margin: 0.9rem 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 253, 248, 0.92);
+  border: 1px solid rgba(215, 207, 193, 0.9);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.toolbar__row {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.toolbar__row + .toolbar__row {
+  margin-top: 1rem;
+}
+
+.search-field {
+  display: grid;
+  gap: 0.45rem;
+  flex: 1;
+}
+
+.search-field span,
+.toggle span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.search-field input,
+.hymn-card input[type="text"] {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  transition: border-color 160ms ease, box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.search-field input:focus,
+.hymn-card input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(84, 107, 95, 0.14);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 48px;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.toggle input {
+  inline-size: 1rem;
+  block-size: 1rem;
+  accent-color: var(--accent);
+}
+
+.toolbar__row--meta {
+  align-items: center;
+}
+
+.counters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.5rem;
+}
+
+.counters p {
+  margin: 0;
+  color: var(--muted);
+}
+
+button {
+  padding: 0.85rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fffdf8;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease,
+    box-shadow 160ms ease;
+  box-shadow: 0 12px 24px rgba(64, 82, 71, 0.18);
+}
+
+button:hover,
+button:focus-visible {
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+button:focus-visible {
+  outline: none;
+}
+
+.hymn-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.hymn-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.15rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(70, 56, 45, 0.05);
+  transition: border-color 160ms ease, transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.hymn-card:hover {
+  border-color: #bcae96;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(70, 56, 45, 0.08);
+}
+
+.hymn-card__top {
+  display: flex;
+  gap: 0.9rem;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.hymn-card__main {
+  display: flex;
+  gap: 0.9rem;
+  align-items: start;
+  flex: 1;
+}
+
+.hymn-card__main input[type="checkbox"] {
+  margin-top: 0.25rem;
+  inline-size: 1.05rem;
+  block-size: 1.05rem;
+  accent-color: var(--accent);
+}
+
+.hymn-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+.lyrics-link {
+  color: var(--accent-strong);
+  text-decoration: none;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.lyrics-link:hover,
+.lyrics-link:focus-visible {
+  text-decoration: underline;
+}
+
+.hymn-card__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.empty-state {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  background: rgba(255, 253, 248, 0.72);
+}
+
+@media (max-width: 760px) {
+  .page {
+    width: min(100% - 1rem, 100%);
+    padding-top: 1.25rem;
+  }
+
+  .toolbar__row,
+  .hymn-card__top,
+  .hymn-card__fields {
+    grid-template-columns: 1fr;
+    display: grid;
+    align-items: stretch;
+  }
+
+  .toolbar__row--meta {
+    gap: 0.9rem;
+  }
+
+  .counters {
+    gap: 0.4rem 1rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}

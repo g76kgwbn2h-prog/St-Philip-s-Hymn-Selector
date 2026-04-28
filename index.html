@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>St Philip’s Hymn Selection</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Church Service Planning</p>
+          <h1>St Philip’s Hymn Selection</h1>
+          <p class="intro">
+            Browse the full hymn list, add notes and tags, and keep selections
+            saved on this device.
+          </p>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="Hymn filters and actions">
+        <div class="toolbar__row">
+          <label class="search-field" for="searchInput">
+            <span>Search hymns</span>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search by hymn title"
+              autocomplete="off"
+            />
+          </label>
+
+          <label class="toggle" for="selectedOnly">
+            <input id="selectedOnly" type="checkbox" />
+            <span>Show selected only</span>
+          </label>
+        </div>
+
+        <div class="toolbar__row toolbar__row--meta">
+          <div class="counters" aria-live="polite">
+            <p id="showingCount">Showing 0 of 123 hymns</p>
+            <p id="selectedCount">Selected 0 hymns</p>
+          </div>
+
+          <button id="copyButton" type="button">Copy selected hymns</button>
+        </div>
+      </section>
+
+      <section aria-label="Hymn list">
+        <div id="hymnList" class="hymn-list"></div>
+        <p id="emptyState" class="empty-state" hidden>
+          No hymns match the current filters.
+        </p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
