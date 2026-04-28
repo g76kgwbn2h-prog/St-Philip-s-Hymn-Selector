@@ -11,8 +11,8 @@ A simple static website for browsing and selecting hymns for church services.
 ## Local use
 
 1. Open `index.html` in a web browser.
-2. Search hymns, tick selections, and add notes or tags.
-3. Your selections, notes, and tags are saved in `localStorage` on that device and browser.
+2. Search hymns and tick selections.
+3. Your selections are saved in `localStorage` on that device and browser.
 
 ## Deploying to Render
 

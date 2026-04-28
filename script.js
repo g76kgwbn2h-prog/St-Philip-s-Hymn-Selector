@@ -146,9 +146,7 @@ let hymnState = loadState();
 
 function createDefaultEntry() {
   return {
-    selected: false,
-    notes: "",
-    tags: ""
+    selected: false
   };
 }
 
@@ -159,9 +157,7 @@ function loadState() {
     return hymns.reduce((accumulator, title) => {
       const entry = savedState[title] || {};
       accumulator[title] = {
-        selected: Boolean(entry.selected),
-        notes: typeof entry.notes === "string" ? entry.notes : "",
-        tags: typeof entry.tags === "string" ? entry.tags : ""
+        selected: Boolean(entry.selected)
       };
       return accumulator;
     }, {});
@@ -227,30 +223,6 @@ function renderList() {
               View Lyrics
             </a>
           </div>
-          <div class="hymn-card__fields">
-            <div class="field">
-              <label for="notes-${index}">Notes</label>
-              <input
-                id="notes-${index}"
-                type="text"
-                placeholder="Optional notes"
-                data-role="notes"
-                data-title="${safeTitle}"
-                value="${escapeHtml(state.notes)}"
-              />
-            </div>
-            <div class="field">
-              <label for="tags-${index}">Tags</label>
-              <input
-                id="tags-${index}"
-                type="text"
-                placeholder="Optional tags"
-                data-role="tags"
-                data-title="${safeTitle}"
-                value="${escapeHtml(state.tags)}"
-              />
-            </div>
-          </div>
         </article>
       `;
     })
@@ -314,26 +286,6 @@ async function copySelectedHymns() {
 searchInput.addEventListener("input", renderList);
 selectedOnlyInput.addEventListener("change", renderList);
 copyButton.addEventListener("click", copySelectedHymns);
-
-// Event delegation keeps the input wiring simple even as the list re-renders.
-hymnList.addEventListener("input", (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLInputElement)) {
-    return;
-  }
-
-  const title = target.dataset.title;
-  const role = target.dataset.role;
-
-  if (!title || !role) {
-    return;
-  }
-
-  if (role === "notes" || role === "tags") {
-    updateEntry(title, role, target.value);
-    refreshCounters();
-  }
-});
 
 hymnList.addEventListener("change", (event) => {
   const target = event.target;
