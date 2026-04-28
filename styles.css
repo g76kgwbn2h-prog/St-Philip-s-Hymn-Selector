@@ -200,6 +200,14 @@ button:focus-visible {
   justify-content: space-between;
 }
 
+.hymn-card__actions {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .hymn-card__main {
   display: flex;
   gap: 0.9rem;
@@ -220,16 +228,36 @@ button:focus-visible {
   line-height: 1.45;
 }
 
-.lyrics-link {
+.hymn-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.3rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
   color: var(--accent-strong);
   text-decoration: none;
   white-space: nowrap;
-  align-self: center;
+  transition: border-color 160ms ease, background-color 160ms ease,
+    color 160ms ease, transform 160ms ease;
 }
 
-.lyrics-link:hover,
-.lyrics-link:focus-visible {
-  text-decoration: underline;
+.hymn-action:hover,
+.hymn-action:focus-visible {
+  border-color: #bcae96;
+  background: var(--surface-strong);
+  transform: translateY(-1px);
+}
+
+.hymn-action:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(84, 107, 95, 0.14);
+}
+
+.hymn-action--secondary {
+  background: rgba(84, 107, 95, 0.08);
 }
 
 .empty-state {
