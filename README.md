@@ -31,10 +31,6 @@ This site is plain static HTML, CSS, and JavaScript, so no build step is needed.
    - **Publish Directory:** `.`
 6. Create the site and wait for deployment to finish.
 
-## Updating lyrics links
+## Lyrics links
 
-Each hymn currently uses a placeholder `View Lyrics` URL in `script.js`:
-
-- `https://example.com/lyrics`
-
-When you have real lyric links, replace that placeholder with hymn-specific URLs.
+Each hymn now uses an external Hymnary search link generated from its title in `script.js`.

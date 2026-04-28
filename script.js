@@ -123,6 +123,14 @@ const hymns = [
   "Will Your Anchor Hold"
 ];
 
+// Use Hymnary search pages as reliable external lyric lookups without hosting lyrics locally.
+const lyricLinks = Object.fromEntries(
+  hymns.map((title) => [
+    title,
+    `https://hymnary.org/search?qu=${encodeURIComponent(title)}`
+  ])
+);
+
 const STORAGE_KEY = "st-philips-hymn-selection";
 const TOTAL_HYMNS = hymns.length;
 
@@ -135,10 +143,6 @@ const copyButton = document.querySelector("#copyButton");
 const emptyState = document.querySelector("#emptyState");
 
 let hymnState = loadState();
-
-if (TOTAL_HYMNS !== 123) {
-  console.warn(`Expected 123 hymns, found ${TOTAL_HYMNS}.`);
-}
 
 function createDefaultEntry() {
   return {
@@ -197,6 +201,7 @@ function renderList() {
     .map((title, index) => {
       const state = hymnState[title];
       const safeTitle = escapeHtml(title);
+      const lyricsUrl = lyricLinks[title] || "#";
 
       return `
         <article class="hymn-card" data-title="${safeTitle}">
@@ -215,7 +220,7 @@ function renderList() {
             </div>
             <a
               class="lyrics-link"
-              href="https://example.com/lyrics"
+              href="${lyricsUrl}"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -252,19 +257,27 @@ function renderList() {
     .join("");
 
   emptyState.hidden = visibleHymns.length !== 0;
-  showingCount.textContent = `Showing ${visibleHymns.length} of ${TOTAL_HYMNS} hymns`;
-  selectedCount.textContent = `Selected ${countSelectedHymns()} hymns`;
+  refreshCounters(visibleHymns.length);
 }
 
 function countSelectedHymns() {
   return hymns.filter((title) => hymnState[title].selected).length;
 }
 
+function refreshCounters(visibleCount) {
+  const resolvedVisibleCount =
+    typeof visibleCount === "number"
+      ? visibleCount
+      : hymnList.querySelectorAll(".hymn-card").length;
+
+  showingCount.textContent = `Showing ${resolvedVisibleCount} of ${TOTAL_HYMNS} hymns`;
+  selectedCount.textContent = `Selected ${countSelectedHymns()} hymns`;
+}
+
 function updateEntry(title, field, value) {
   hymnState[title] = hymnState[title] || createDefaultEntry();
   hymnState[title][field] = value;
   saveState();
-  renderList();
 }
 
 async function copySelectedHymns() {
@@ -318,6 +331,7 @@ hymnList.addEventListener("input", (event) => {
 
   if (role === "notes" || role === "tags") {
     updateEntry(title, role, target.value);
+    refreshCounters();
   }
 });
 
@@ -335,6 +349,12 @@ hymnList.addEventListener("change", (event) => {
   }
 
   updateEntry(title, "selected", target.checked);
+  if (selectedOnlyInput.checked) {
+    renderList();
+    return;
+  }
+
+  refreshCounters();
 });
 
 renderList();
